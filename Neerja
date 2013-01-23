@@ -1,1 +1,99 @@
-'''ignore me '''
+''' Grid class 
+Neerja 
+Jan 20, 2012
+
+'''
+import pygame, sys
+
+###Global variables
+
+WIDTH = 10
+HEIGHT = 10  
+SIZE = 30
+
+# RGB Color definitions
+black = (0, 0, 0)
+grey = (100, 100, 100)
+white = (255, 255, 255)
+green = (0, 255, 0)
+red   = (255, 0, 0)
+blue  = (0, 0, 255)
+
+def getRowTopLoc(rowNum, height = HEIGHT):
+
+    rowTopLoc = rowNum*height #assuming zero index
+    return rowTopLoc 
+
+def getColLeftLoc(colNum, width = WIDTH):
+    
+    colLeftLoc = colNum*width+10
+    return colLeftLoc
+
+class Grid:
+	def __init__(self, size = SIZE):
+		self.size = size
+
+		self.squares = pygame.sprite.RenderPlain()
+		self.gridSquares = []
+
+		for i in xrange(size):
+            for j in xrange(size):
+                    s = Square(i,j,white)
+                    s = Square(i,j,black)
+                s.rect = s.getRect()
+                self.gridSquares.append(s)
+                self.squares.add(s)
+
+        # initialize players here
+        self.player1 = Player(self.arguments) 
+
+        # add players to playerList
+        self.playerList = pygame.sprite.RenderPlain()
+        self.playerList.add(self.player1)
+
+    def drawGrid(screen, size = SIZE):
+    
+    	for i in range(size+1):
+        	pygame.draw.line(screen, blue, (0,i*HEIGHT), (size*WIDTH,i*HEIGHT))
+    	for j in range(size+1):
+    	    pygame.draw.line(screen, blue, (j*WIDTH,0), (j*WIDTH,size*HEIGHT))
+  	  	pygame.display.flip()
+
+    def get Square(self, x, y):
+
+    	for g in self.gridSquares:
+    		if g.row == y and g.col ==x:
+    			return g
+
+class Square(pygame.sprite.Sprite):
+	def __init__(self, row, col, color):
+		pygame.sprite.Sprite.__init__(self)
+		self.row = row
+        self.col = col
+        self.image = pygame.Surface([WIDTH, HEIGHT])
+		self.rect = self.image.get_rect() 
+		self.color = color
+
+	def getRect(self):
+        return pygame.Rect(getColLeftLoc(self.col), getRowTopLoc(self.row), WIDTH, HEIGHT)
+
+    def changeColor(self, color):
+        self.color = color
+        self.image.fill(self.color) 
+
+class Player(pygame.sprite.Sprite)
+	 def initialize 
+
+	 def get currentposition
+
+	 def rotateLeft
+	 def rotateright
+	 def stepforward
+
+	 def collisions
+
+	 def setPic(self, picture)
+
+
+
+
